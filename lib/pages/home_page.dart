@@ -15,7 +15,15 @@ class HomePage extends StatelessWidget {
         height: _deviceHeight,
         width: _deviceWidth,
         padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.1),
-        child: _pageTitle(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _pageTitle(),
+            _destinationDropDown(),
+          ],
+        ),
       ),
     ));
   }
@@ -35,6 +43,32 @@ class HomePage extends StatelessWidget {
           fit: BoxFit.contain,
           image: AssetImage("assets/images/astro_moon.png"),
         ),
+      ),
+    );
+  }
+
+  Widget _destinationDropDown() {
+    List<String> _items = ["International Space Station", "Moon"];
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
+      width: _deviceWidth,
+      decoration: BoxDecoration(
+          color: const Color.fromRGBO(53, 53, 53, 1.0),
+          borderRadius: BorderRadius.circular(10.0)),
+      child: DropdownButton(
+        value: _items.first,
+        underline: Container(),
+        onChanged: (_) {},
+        items: _items.map(
+          (e) {
+            return DropdownMenuItem(
+              value: e,
+              child: Text(e),
+            );
+          },
+        ).toList(),
+        dropdownColor: const Color.fromRGBO(53, 53, 53, 1.0),
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
