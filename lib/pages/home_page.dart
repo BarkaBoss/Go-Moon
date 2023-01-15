@@ -15,15 +15,22 @@ class HomePage extends StatelessWidget {
       child: Container(
         height: _deviceHeight,
         width: _deviceWidth,
-        padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.1),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
+        child: Stack(
           children: [
-            _pageTitle(),
-            _destinationDropDown(),
-            _travelersInformationWidget(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _pageTitle(),
+                _bookARideWidget(),
+              ],
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: _astroWidget(),
+            )
           ],
         ),
       ),
@@ -40,6 +47,8 @@ class HomePage extends StatelessWidget {
 
   Widget _astroWidget() {
     return Container(
+      height: _deviceHeight * 0.50,
+      width: _deviceWidth * 0.65,
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.contain,
@@ -55,8 +64,49 @@ class HomePage extends StatelessWidget {
   }
   
   Widget _travelersInformationWidget(){
-    return CustomDropDownButton(
-        values: const ["1","2","3","4"],
-        width: _deviceWidth * 0.45);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children :[
+        CustomDropDownButton(
+          values: const ["1","2","3","4"],
+          width: _deviceWidth * 0.45),
+        CustomDropDownButton(
+            values: const ["Economy","Business","First Class"],
+            width: _deviceWidth * 0.40),
+    ],
+    );
+  }
+
+  Widget _bookARideWidget(){
+    return Container(
+      height: _deviceHeight * 0.25,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _destinationDropDown(),
+          _travelersInformationWidget(),
+          _rideButton()
+        ],
+      ),
+    );
+  }
+  
+  Widget _rideButton(){
+    return Container(
+      width: _deviceWidth,
+      margin: EdgeInsets.only(bottom: _deviceHeight * 0.01),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10)
+      ),
+      child: MaterialButton(
+        onPressed: (){},
+        child: const Text("Book Ride", style: TextStyle(color: Colors.black),),
+      ),
+    );
   }
 }
