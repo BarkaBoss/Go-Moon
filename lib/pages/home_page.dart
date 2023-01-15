@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_moon/widgets/custom_dropdown.dart';
 
 class HomePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidth;
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
           children: [
             _pageTitle(),
             _destinationDropDown(),
+            _travelersInformationWidget(),
           ],
         ),
       ),
@@ -48,28 +50,13 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _destinationDropDown() {
-    List<String> _items = ["International Space Station", "Moon"];
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
-      width: _deviceWidth,
-      decoration: BoxDecoration(
-          color: const Color.fromRGBO(53, 53, 53, 1.0),
-          borderRadius: BorderRadius.circular(10.0)),
-      child: DropdownButton(
-        value: _items.first,
-        underline: Container(),
-        onChanged: (_) {},
-        items: _items.map(
-          (e) {
-            return DropdownMenuItem(
-              value: e,
-              child: Text(e),
-            );
-          },
-        ).toList(),
-        dropdownColor: const Color.fromRGBO(53, 53, 53, 1.0),
-        style: const TextStyle(color: Colors.white),
-      ),
-    );
+    List<String> items = ["International Space Station", "Moon"];
+    return CustomDropDownButton(values: items, width: _deviceWidth);
+  }
+  
+  Widget _travelersInformationWidget(){
+    return CustomDropDownButton(
+        values: const ["1","2","3","4"],
+        width: _deviceWidth * 0.45);
   }
 }
